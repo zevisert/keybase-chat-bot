@@ -3,7 +3,7 @@ import {execToJson} from './exec-to-json'
 import {CHAT_API_VERSION} from './constants.js'
 import type {CbError} from './types'
 
-type ApiCommandArg = {method: string, options: Object}
+export type ApiCommandArg = {method: string, options: Object}
 
 // ----------------------------------------------------------------------------
 // calls back with a JSON object describing the user's
@@ -11,7 +11,7 @@ type ApiCommandArg = {method: string, options: Object}
 // may be of interest
 // ----------------------------------------------------------------------------
 
-function runApiCommand (arg: ApiCommandArg, cb: CbError) : void {
+export function runApiCommand (arg: ApiCommandArg, cb: CbError) : void {
   let input:Object = {
     method: arg.method,
     params: {
@@ -36,6 +36,3 @@ function runApiCommand (arg: ApiCommandArg, cb: CbError) : void {
     cb(err, res)
   })
 }
-
-export {runApiCommand}
-export type {ApiCommandArg}

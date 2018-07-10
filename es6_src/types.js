@@ -16,18 +16,13 @@
 //     function b (cb: CbError)  : void {
 //     function c (cb: CbDeviceUsernamePair) : void {
 
+export type DeviceUsernamePair = {username: string, devicename: string}
+export type ChatChannel = {name: string, public: boolean, topic_type: string}
+export type ChatSendMessage = {body: string}
+export type ChatReadMessage = any
 
-type DeviceUsernamePair = {username: string, devicename: string}
-type ChatChannel = {name: string, public: boolean, topic_type: string}
-type ChatSendMessage = {body: string}
-type ChatReadMessage = any
+export type CbError = (err: ?Error) => void
+export type CbAny = (err: ?Error, res : any) => void
+export type CbDeviceUsernamePair = (err : ?Error, res : ?DeviceUsernamePair) => void
 
-type CbError = (err: ?Error) => void
-type CbAny = (err: ?Error, res : any) => void
-type CbDeviceUsernamePair = (err : ?Error, res : ?DeviceUsernamePair) => void
-
-type MessagesHandler = (arg: {messages: Array<ChatReadMessage>, channel: ChatChannel}) => void
-
-export type {DeviceUsernamePair, ChatChannel, ChatSendMessage, ChatReadMessage}
-export type {MessagesHandler}
-export type {CbAny, CbError, CbDeviceUsernamePair}
+export type MessagesHandler = (arg: {messages: Array<ChatReadMessage>, channel: ChatChannel}) => void

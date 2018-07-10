@@ -13,7 +13,7 @@ import type {ApiCommandArg} from './chat-api.js'
 
 // ============================================================================
 
-class Bot {
+export class Bot {
   _dPair: ?DeviceUsernamePair;
   _initialized: boolean;
   _channelWatchers: Map<string, ChannelWatcher>;
@@ -166,6 +166,3 @@ class Bot {
   }
 
 }
-
-
-export {Bot}

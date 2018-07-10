@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @flow
 var Bot = require('../index.js').Bot
 
 var bot = new Bot()
@@ -28,7 +29,6 @@ bot.init({verbose: false}, function (err) {
       } else {
         console.log('Message sent!')
       }
-    });
+    })
   }
-
-});
+})

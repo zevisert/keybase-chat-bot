@@ -1,5 +1,5 @@
 // @flow
-let tweakables = {
+export let tweakables = {
   MIN_CHANNEL_WATCH_LOOP: 1000,
   MAX_CHANNEL_WATCH_LOOP: 60000,
   DEFAULT_GAS: 500,
@@ -9,5 +9,3 @@ let tweakables = {
   GAS_MONITOR_WINDOW: 10000,
   GAS_ADJ_MULT: 1.1,
 }
-
-export default tweakables

@@ -1,10 +1,13 @@
 // @flow
 import {Bot} from './bot.js'
-import type {MessagesHandler} from './types.js'
-import type {CbError} from './types.js'
-import type {ChatChannel, ChatReadMessage} from './types.js'
+import type {
+  MessagesHandler,
+  CbError,
+  ChatChannel,
+  ChatReadMessage,
+} from './types.js'
 
-class ChannelWatcher {
+export class ChannelWatcher {
 
   // --------------------------------------------------------------------------
 
@@ -70,5 +73,3 @@ class ChannelWatcher {
   }
 
 }
-
-export {ChannelWatcher}

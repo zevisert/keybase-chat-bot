@@ -1,7 +1,7 @@
 // @flow
 import tweakables from './tweakables.js'
 
-class GasPreserver {
+export class GasPreserver {
 
   // --------------------------------------------------------------------------
 
@@ -10,27 +10,27 @@ class GasPreserver {
 
   // --------------------------------------------------------------------------
 
-  constructor () : void {
+  constructor (): void {
     this._lastPassedGas = []
     this._currentWait = tweakables.MIN_CHANNEL_WATCH_LOOP
   }
 
   // --------------------------------------------------------------------------
 
-  passGas (rateLimits: Array<any>) : void {
+  passGas (rateLimits: Array<any>): void {
     this._lastPassedGas.push(rateLimits[0]) // let's just take the first for now
     this._filterOldGas()
   }
 
   // --------------------------------------------------------------------------
 
-  recommendedWait () : number {
+  recommendedWait (): number {
     let speed = this._getCurrentSpeed()
     let gas = this._getRemainingGas()
-    let gas_left_with_buffer = Math.max(0, gas - tweakables.TARGET_GAS_REMAINING)
+    let gasLeftWithBuffer = Math.max(0, gas - tweakables.TARGET_GAS_REMAINING)
     let timeLeft = this._getTimeTillReset()
     // this._currentWait = 1000 * (speed * timeLeft / gas) * tweakables.SAFETY_BUFFER
-    if (speed * timeLeft > gas_left_with_buffer) {
+    if (speed * timeLeft > gasLeftWithBuffer) {
       this._currentWait *= tweakables.GAS_ADJ_MULT
     } else {
       this._currentWait /= tweakables.GAS_ADJ_MULT
@@ -43,7 +43,7 @@ class GasPreserver {
 
   // --------------------------------------------------------------------------
 
-  _filterOldGas () : void {
+  _filterOldGas (): void {
     let ind = 0
     // throw away any data before a reset
     for (ind = this._lastPassedGas.length - 2; ind >= 0; ind--) {
@@ -64,14 +64,14 @@ class GasPreserver {
       let candidates = this._lastPassedGas.slice(0, -2)
       candidates = candidates.filter((c) => c.reset < keepers[1].reset + tweakables.GAS_MONITOR_WINDOW / 1000)
       this._lastPassedGas = candidates.concat(keepers)
-      //console.log(this._lastPassedGas)
+      // console.log(this._lastPassedGas)
     }
     return
   }
 
   // --------------------------------------------------------------------------
 
-  _getCurrentSpeed () : number {
+  _getCurrentSpeed (): number {
     if (this._lastPassedGas.length < 2) {
       return 1
     } else {
@@ -84,7 +84,7 @@ class GasPreserver {
 
   // --------------------------------------------------------------------------
 
-  _getRemainingGas () : number {
+  _getRemainingGas (): number {
     if (this._lastPassedGas.length < 1) {
       return tweakables.DEFAULT_GAS
     } else {
@@ -94,7 +94,7 @@ class GasPreserver {
 
   // --------------------------------------------------------------------------
 
-  _getTimeTillReset () : number {
+  _getTimeTillReset (): number {
     if (this._lastPassedGas.length < 1) {
       return tweakables.DEFAULT_TIME_LEFT
     } else {
@@ -105,5 +105,3 @@ class GasPreserver {
   // --------------------------------------------------------------------------
 
 }
-
-export {GasPreserver}

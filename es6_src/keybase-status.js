@@ -1,7 +1,9 @@
 // @flow
-import type {CbAny} from './types.js'
-import type {CbDeviceUsernamePair} from './types.js'
 import {execToJson} from './exec-to-json.js'
+import type {
+  CbAny,
+  CbDeviceUsernamePair,
+} from './types.js'
 
 // ----------------------------------------------------------------------------
 // calls back with a JSON object describing the user's
@@ -9,7 +11,7 @@ import {execToJson} from './exec-to-json.js'
 // may be of interest
 // ----------------------------------------------------------------------------
 
-function getKeybaseNativeStatusJson (cb: CbAny) : void {
+export function getKeybaseNativeStatusJson (cb: CbAny): void {
   execToJson({command: 'keybase', args: ['status', '-j']}, (err, status) => {
     cb(err, status)
   })
@@ -20,7 +22,7 @@ function getKeybaseNativeStatusJson (cb: CbAny) : void {
 // unlocked.
 // ----------------------------------------------------------------------------
 
-function getKeybaseUsernameAndDevicename (cb : CbDeviceUsernamePair) {
+export function getKeybaseUsernameAndDevicename (cb : CbDeviceUsernamePair) {
   getKeybaseNativeStatusJson((err, status) => {
     if (status && status.Username && status.Device && status.Device.name) {
       return cb(null, {username: status.Username, devicename: status.Device.name})
@@ -32,5 +34,3 @@ function getKeybaseUsernameAndDevicename (cb : CbDeviceUsernamePair) {
     }
   })
 }
-
-export {getKeybaseNativeStatusJson, getKeybaseUsernameAndDevicename}

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+// @flow
 var Bot = require('../index.js').Bot
 
 var bot = new Bot()
@@ -7,7 +8,7 @@ bot.init({verbose: false}, function (err) {
   if (!err) {
     bot.chatList(null, function (err, res) {
       if (!err) {
-        var unreadCount = 0;
+        var unreadCount = 0
         for (var c of res.conversations) {
           unreadCount += c.unread ? 1 : 0
         }
@@ -16,5 +17,3 @@ bot.init({verbose: false}, function (err) {
     })
   }
 })
-
-

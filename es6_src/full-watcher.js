@@ -1,9 +1,11 @@
 // @flow
 import {Bot} from './bot.js'
-import type {MessagesHandler} from './types.js'
-import type {CbError} from './types.js'
+import type {
+  MessagesHandler,
+  CbError,
+} from './types.js'
 
-class FullWatcher {
+export class FullWatcher {
 
   // --------------------------------------------------------------------------
 
@@ -13,7 +15,7 @@ class FullWatcher {
 
   // --------------------------------------------------------------------------
 
-  constructor (arg: {bot: Bot, onMessages: MessagesHandler}) : void {
+  constructor (arg: {bot: Bot, onMessages: MessagesHandler}): void {
     this._bot = arg.bot
     this._onMessages = arg.onMessages
     this._loopCount = 0
@@ -22,7 +24,7 @@ class FullWatcher {
 
   // --------------------------------------------------------------------------
 
-  _checkForNewMessagesInOneConversation (conversation: any, cb: CbError) : void {
+  _checkForNewMessagesInOneConversation (conversation: any, cb: CbError): void {
     this._bot.chatRead({channel: conversation.channel, unreadOnly: true}, (err, res) => {
       if (res && res.ratelimits) {
         this._bot._gasPreserver.passGas(res.ratelimits)
@@ -40,7 +42,7 @@ class FullWatcher {
 
   // --------------------------------------------------------------------------
 
-  _checkForNewMessagesInConversations (arg: {conversations: any, index?: number}, cb: CbError) : void {
+  _checkForNewMessagesInConversations (arg: {conversations: any, index?: number}, cb: CbError): void {
     let {conversations, index} = arg
     if (!index) {
       index = 0
@@ -60,7 +62,7 @@ class FullWatcher {
 
   // --------------------------------------------------------------------------
 
-  _checkForNewMessagesInAllConversations (cb: CbError) : void {
+  _checkForNewMessagesInAllConversations (cb: CbError): void {
     this._bot.chatList(null, (err, res) => {
       if (err) {
         console.log('Got error getting chat list:', err)
@@ -83,10 +85,9 @@ class FullWatcher {
     })
   }
 
-
   // --------------------------------------------------------------------------
 
-  _watchLoop () : void {
+  _watchLoop (): void {
     this._checkForNewMessagesInAllConversations(() => {
       let delay = this._bot._gasPreserver.recommendedWait()
       setTimeout(() => {
@@ -99,5 +100,3 @@ class FullWatcher {
   // --------------------------------------------------------------------------
 
 }
-
-export {FullWatcher}
