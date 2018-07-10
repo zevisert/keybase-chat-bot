@@ -19,32 +19,32 @@ npm install keybase-chat-bot
 // Says hello to the keybase `kbot` account
 //
 
-var keybaseChatBot = require('keybase-chat-bot')
+const keybaseChatBot = require('keybase-chat-bot')
 
-var bot = new keybaseChatBot.Bot()
+const bot = new keybaseChatBot.Bot()
 
-bot.init({verbose: false}, function (err) {
+bot.init({verbose: false}, (err) => {
   if (!err) {
 
-    var channel = {
-      name:       'kbot,' + bot.myInfo().username,
+    const channel = {
+      name:       `kbot,${bot.myInfo().username}`,
       public:     false,
       topic_type: 'chat'
     }
 
-    var send_arg = {
+    const send_arg = {
       channel: channel,
       message: {
-        body: 'Hello kbot! Saying hello from my device ' + bot.myInfo().devicename
+        body: `Hello kbot! Saying hello from my device ${bot.myInfo().devicename}`
       }
     }
 
-    bot.chatSend(send_arg, function(err) {
+    bot.chatSend(send_arg, (err) => {
       console.log('That probably sent!', err);
-    });
+    })
   }
 
-});
+})
 ```
 
 ### Commands
@@ -132,16 +132,15 @@ Example usage:
 
 ```javascript
 // reply to incoming traffic on all channels with 'thanks!'
-var onMessages = function(m) {
-  var channel  = m.channel
-  var messages = m.messages // we could look in this array to read them and write custom replies
+function onMessages (m) {
+  const messages = m.messages // we could look in this array to read them and write custom replies
   bot.chatSend({
-    channel: channel
+    channel: m.channel
     message: {
       body: 'thanks!!!'
     }
-  }, function(err, res) {
-    if (err) {console.log(err);}
+  }, (err, res) => {
+    if (err) {console.log(err)}
   });
 }
 bot.watchAllChannelsForNewMessages({onMessages: onMessages});

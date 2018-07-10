@@ -1,16 +1,13 @@
 // @flow
-var DashboardPlugin = require('webpack-dashboard/plugin')
-var FlowStatusWebpackPlugin = require('flow-status-webpack-plugin')
-var webpack = require('webpack')
+const DashboardPlugin = require('webpack-dashboard/plugin')
+const FlowStatusWebpackPlugin = require('flow-status-webpack-plugin')
+const webpack = require('webpack')
 
-var plugins = []
-if (process.env.DASH) {
-  plugins = [
-    new webpack.NoErrorsPlugin(),
-    new DashboardPlugin(),
-    new FlowStatusWebpackPlugin({failOnError: true}),
-  ]
-}
+const plugins = process.env.DASH ? [
+  new webpack.NoErrorsPlugin(),
+  new DashboardPlugin(),
+  new FlowStatusWebpackPlugin({failOnError: true}),
+] : []
 
 module.exports = {
   target: 'node',

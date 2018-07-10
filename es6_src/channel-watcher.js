@@ -1,5 +1,6 @@
 // @flow
 import {Bot} from './bot.js'
+
 import type {
   MessagesHandler,
   CbError,

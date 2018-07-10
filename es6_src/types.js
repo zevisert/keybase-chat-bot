@@ -25,4 +25,5 @@ export type CbError = (err: ?Error) => void
 export type CbAny = (err: ?Error, res : any) => void
 export type CbDeviceUsernamePair = (err : ?Error, res : ?DeviceUsernamePair) => void
 
+export type ApiCommandArg = {method: string, options: Object}
 export type MessagesHandler = (arg: {messages: Array<ChatReadMessage>, channel: ChatChannel}) => void

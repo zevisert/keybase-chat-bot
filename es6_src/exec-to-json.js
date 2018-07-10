@@ -1,6 +1,9 @@
 // @flow
 import {spawn} from 'child_process'
-import type {CbAny} from './types'
+
+import type {
+  CbAny,
+} from './types'
 
 // takes a string to run on the command line that is expecting
 // JSON in stdout. calls back with an error if output doesn't

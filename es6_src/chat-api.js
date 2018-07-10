@@ -1,9 +1,11 @@
 // @flow
 import {execToJson} from './exec-to-json'
 import {CHAT_API_VERSION} from './constants.js'
-import type {CbError} from './types'
 
-export type ApiCommandArg = {method: string, options: Object}
+import type {
+  ApiCommandArg,
+  CbError,
+} from './types'
 
 // ----------------------------------------------------------------------------
 // calls back with a JSON object describing the user's

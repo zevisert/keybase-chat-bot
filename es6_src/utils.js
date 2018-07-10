@@ -1,5 +1,7 @@
 // @flow
-import type {ChatChannel} from './types.js'
+import type {
+  ChatChannel,
+} from './types.js'
 
 export function chatChannelToKey (channel: ChatChannel): string {
   // TODO: come back to this

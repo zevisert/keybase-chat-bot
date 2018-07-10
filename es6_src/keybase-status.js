@@ -1,5 +1,6 @@
 // @flow
 import {execToJson} from './exec-to-json.js'
+
 import type {
   CbAny,
   CbDeviceUsernamePair,

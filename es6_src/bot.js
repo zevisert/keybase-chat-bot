@@ -5,10 +5,16 @@ import {ChannelWatcher} from './channel-watcher.js'
 import {chatChannelToKey} from './utils.js'
 import {FullWatcher} from './full-watcher.js'
 import {GasPreserver} from './gas-preserver.js'
-import type {CbError, CbAny} from './types.js'
-import type {DeviceUsernamePair, ChatChannel, ChatSendMessage} from './types.js'
-import type {MessagesHandler} from './types.js'
-import type {ApiCommandArg} from './chat-api.js'
+
+import type {
+  ApiCommandArg,
+  CbError,
+  CbAny,
+  DeviceUsernamePair,
+  ChatChannel,
+  ChatSendMessage,
+  MessagesHandler,
+} from './types.js'
 
 
 // ============================================================================
@@ -119,7 +125,7 @@ export class Bot {
   watchAllChannelsForNewMessages (options: {onMessages: MessagesHandler}) {
     let {onMessages} = options
     if (this._fullWatcher) {
-      throw new Error(`already watching watching; can't have 2 message watchers}`)
+      throw new Error(`already watching watching; can't have 2 message watchers`)
     } else {
       this._fullWatcher = new FullWatcher({onMessages, bot: this})
     }
