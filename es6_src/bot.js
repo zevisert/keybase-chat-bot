@@ -159,7 +159,7 @@ export class Bot {
 
   // --------------------------------------------------------------------------
 
-  _safelyRunApiCommand (arg: ApiCommandArg, cb: CbError) : void {
+  _safelyRunApiCommand (arg: ApiCommandArg, cb: CbAny) : void {
     this._checkUserAndInit((err) => {
       if (!err) {
         runApiCommand(arg, (err, res) => {

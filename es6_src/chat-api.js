@@ -4,7 +4,7 @@ import {CHAT_API_VERSION} from './constants.js'
 
 import type {
   ApiCommandArg,
-  CbError,
+  CbAny,
 } from './types'
 
 // ----------------------------------------------------------------------------
@@ -13,7 +13,7 @@ import type {
 // may be of interest
 // ----------------------------------------------------------------------------
 
-export function runApiCommand (arg: ApiCommandArg, cb: CbError) : void {
+export function runApiCommand (arg: ApiCommandArg, cb: CbAny) : void {
   let input:Object = {
     method: arg.method,
     params: {
