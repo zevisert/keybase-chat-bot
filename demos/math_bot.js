@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 // @flow
-var Bot = require('../index.js').Bot
-var mathjs = require('mathjs')
+const Bot = require('../index.js').Bot
+const mathjs = require('mathjs')
+
+const bot = new Bot()
 
 //
 // This bot replies to any message from any user,
@@ -14,7 +16,7 @@ var mathjs = require('mathjs')
 
 // -----------------------------------------------------------------------------
 
-var msgReply = function (s) {
+const msgReply = (s) => {
   const calc = mathjs['eval']
   let ans
   try {
@@ -34,22 +36,20 @@ var msgReply = function (s) {
 // -----------------------------------------------------------------------------
 // -----------------------------------------------------------------------------
 
-var bot = new Bot()
-
-bot.init(null, function (err) {
+bot.init(null, (err) => {
   if (err) {
     console.log(err)
   } else {
     console.log('I am me! ', bot.myInfo().username, bot.myInfo().devicename)
-    var onMessages = function (o) {
+    const onMessages = (o) => {
       for (let m of o.messages) {
-        var prefix = m.msg.content.text.body.slice(0, 6)
+        const prefix = m.msg.content.text.body.slice(0, 6)
         console.log(prefix)
         if (prefix === '/math ') {
-          var reply = {
+          const reply = {
             body: msgReply(m.msg.content.text.body.slice(6)),
           }
-          bot.chatSend({channel: o.channel, message: reply}, function (err, res) {
+          bot.chatSend({channel: o.channel, message: reply}, (err, res) => {
             if (err) {
               console.log(err)
             }
@@ -57,8 +57,9 @@ bot.init(null, function (err) {
         }
       }
     }
+
     console.log('Beginning watch for new messages.')
-    console.log('Tell anyone to send a message to ' + bot.myInfo().username + 'starting with /math')
+    console.log('Tell anyone to send a message to ' + bot.myInfo().username + ' starting with /math')
     bot.watchAllChannelsForNewMessages({onMessages: onMessages})
   }
 })

@@ -1,18 +1,16 @@
 #!/usr/bin/env node
 // @flow
-var Bot = require('../index.js').Bot
+const Bot = require('../index.js').Bot
 
-var bot = new Bot()
+const bot = new Bot()
 
-bot.init({verbose: false}, function (err) {
+bot.init({verbose: false}, (err) => {
   if (!err) {
-    bot.chatList(null, function (err, res) {
+    bot.chatList(null, (err, res) => {
       if (!err) {
-        var unreadCount = 0
-        for (var c of res.conversations) {
-          unreadCount += c.unread ? 1 : 0
-        }
-        console.log('You have ' + unreadCount + ' unread conversations out of ' + res.conversations.length + ' total.')
+        console.log(res.conversations)
+        const unreadCount = res.conversations.reduce((sum, convo) => (sum += convo.unread ? 1 : 0), 0)
+        console.log(`You have ${unreadCount} unread conversations out of ${res.conversations.length} total.`)
       }
     })
   }

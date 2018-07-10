@@ -1,29 +1,29 @@
 #!/usr/bin/env node
 // @flow
-var Bot = require('../index.js').Bot
+const Bot = require('../index.js').Bot
 
-var bot = new Bot()
+const bot = new Bot()
 
-bot.init({verbose: false}, function (err) {
+bot.init({verbose: false}, (err) => {
   if (err) {
     console.log(err)
   } else {
-    console.log('Your bot is initialized. It is logged in as ' + bot.myInfo().username)
+    console.log(`Your bot is initialized. It is logged in as ${bot.myInfo().username}`)
 
-    var channel = {
-      name: 'kbot,' + bot.myInfo().username,
+    const channel = {
+      name: `kbot,${bot.myInfo().username}`,
       public: false,
       topic_type: 'chat',
     }
 
-    var sendArg = {
+    const sendArg = {
       channel: channel,
       message: {
-        body: 'Hello kbot! This is ' + bot.myInfo().username + ' saying hello from my device ' + bot.myInfo().devicename,
+        body: `Hello kbot! This is ${bot.myInfo().username} saying hello from my device ${bot.myInfo().devicename}`,
       },
     }
 
-    bot.chatSend(sendArg, function (err) {
+    bot.chatSend(sendArg, (err) => {
       if (err) {
         console.log(err)
       } else {
